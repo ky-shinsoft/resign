@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="theme-midnight">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +11,28 @@
             box-sizing: border-box;
         }
 
+        html {
+            background: var(--bg);
+            background-attachment: fixed;
+            min-height: 100%;
+            transition: background 0.8s ease;
+        }
+
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: var(--bg);
+            background: transparent;
             font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             color: #fff;
             overflow-x: hidden;
             overflow-y: auto;
             padding: 2rem 1rem 4rem;
-            transition: background 0.8s ease;
         }
 
         /* Theme variables */
-        body.theme-midnight {
+        html.theme-midnight {
             --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             --accent: #ffd200;
             --accent2: #f7971e;
@@ -35,7 +41,7 @@
             --text-muted: #aaa;
             --particle-color: rgba(255, 210, 0, 0.3);
         }
-        body.theme-sunset {
+        html.theme-sunset {
             --bg: linear-gradient(135deg, #1a0a2e, #6b1d5e, #e94560);
             --accent: #ff6b6b;
             --accent2: #feca57;
@@ -44,7 +50,7 @@
             --text-muted: #cba;
             --particle-color: rgba(255, 107, 107, 0.3);
         }
-        body.theme-ocean {
+        html.theme-ocean {
             --bg: linear-gradient(135deg, #0a1628, #1a3a5c, #0d7377);
             --accent: #00d2ff;
             --accent2: #3a7bd5;
@@ -53,7 +59,7 @@
             --text-muted: #8cb4c9;
             --particle-color: rgba(0, 210, 255, 0.3);
         }
-        body.theme-forest {
+        html.theme-forest {
             --bg: linear-gradient(135deg, #0a1a0a, #1b4332, #2d6a4f);
             --accent: #95d5b2;
             --accent2: #52b788;
@@ -633,7 +639,7 @@
         }
     </style>
 </head>
-<body class="theme-midnight">
+<body>
     <div class="particles" id="particles"></div>
 
     <div class="theme-switcher">
@@ -739,7 +745,7 @@
 
         // ==================== Theme ====================
         function setTheme(theme) {
-            document.body.className = 'theme-' + theme;
+            document.documentElement.className = 'theme-' + theme;
             document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
             localStorage.setItem('gone-theme', theme);
             // Recreate particles with new color
